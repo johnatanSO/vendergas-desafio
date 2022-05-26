@@ -3,6 +3,7 @@ import { LoginScreen } from "./components/LoginScreen";
 import "./styles/global.scss";
 import { CreateAccountSuccessModal } from "./components/CreateAccountSuccessModal";
 import Modal from "react-modal";
+import {UserDataContextProvider} from './userDataContext'
 
 Modal.setAppElement("#root");
 
@@ -15,7 +16,7 @@ function App() {
   }
 
   return (
-    <>
+    <UserDataContextProvider>
       <CreateAccountSuccessModal
         onRequestClose={handleCloseCreateAccountModal}
         isOpen={createAccountSuccess}
@@ -28,7 +29,7 @@ function App() {
       ) : (
         <h1>Logado</h1>
       )}
-    </>
+    </UserDataContextProvider>
   );
 }
 

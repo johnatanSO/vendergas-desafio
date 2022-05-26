@@ -1,10 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import { api } from "../../services/api";
+import {useContext} from 'react'
+import {userDataContext} from '../../userDataContext'
 
 export function LoginForm({ setLogged }) {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {name, setName} = useContext(userDataContext)
+  const {token, setToken} = useContext(userDataContext)
 
   async function handleLogin(event) {
     event.preventDefault();
@@ -15,8 +19,10 @@ export function LoginForm({ setLogged }) {
         password,
       })
       .then((res) => {
+        console.log(res)
         if (res.status === 200) {
           setLogged(true);
+          /* setToken(res.data.token) */
         }
       })
       .catch((err) => {
