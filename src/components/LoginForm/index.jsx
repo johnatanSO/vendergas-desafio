@@ -7,8 +7,8 @@ import {userDataContext} from '../../userDataContext'
 export function LoginForm({ setLogged }) {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {name, setName} = useContext(userDataContext)
-  const {token, setToken} = useContext(userDataContext)
+  const {setName} = useContext(userDataContext) 
+  /* const {token, setToken} = useContext(userDataContext) */
 
   async function handleLogin(event) {
     event.preventDefault();
@@ -18,11 +18,11 @@ export function LoginForm({ setLogged }) {
         usernameOrEmail,
         password,
       })
-      .then((res) => {
+      .then(async (res) => {
         console.log(res)
         if (res.status === 200) {
+          await setName(res.data.user.username) 
           setLogged(true);
-          /* setToken(res.data.token) */
         }
       })
       .catch((err) => {

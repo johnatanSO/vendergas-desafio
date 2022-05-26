@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { LoginScreen } from "./components/LoginScreen";
 import "./styles/global.scss";
 import { CreateAccountSuccessModal } from "./components/CreateAccountSuccessModal";
 import Modal from "react-modal";
-import {UserDataContextProvider} from './userDataContext'
+import {userDataContext} from './userDataContext'
 
 Modal.setAppElement("#root");
 
 function App() {
   const [logged, setLogged] = useState(false);
-  const [createAccountSuccess, setCreateAccountSuccess] = useState(false);
+  const [createAccountSuccess, setCreateAccountSuccess] = useState(false); 
+  const {name} = useContext(userDataContext)
 
   function handleCloseCreateAccountModal() {
     setCreateAccountSuccess(false);
   }
 
   return (
-    <UserDataContextProvider>
+    <>
       <CreateAccountSuccessModal
         onRequestClose={handleCloseCreateAccountModal}
         isOpen={createAccountSuccess}
@@ -27,9 +28,12 @@ function App() {
           setLogged={setLogged}
         />
       ) : (
-        <h1>Logado</h1>
+        <div>
+          <h2>Usuário logado</h2>
+          <span>Seja bem vindo, {name}</span>
+        </div>
       )}
-    </UserDataContextProvider>
+    </>
   );
 }
 

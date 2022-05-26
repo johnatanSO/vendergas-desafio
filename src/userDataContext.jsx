@@ -8,8 +8,8 @@ export function UserDataContextProvider({children}){
 
   return(
     <userDataContext.Provider value={{
-      name,
       setName,
+      name,
       token,
       setToken
     }}>
