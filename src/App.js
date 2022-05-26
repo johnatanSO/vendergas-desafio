@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { LoginScreen } from "./components/LoginScreen";
+import "./styles/global.scss";
+import { CreateAccountSuccessModal } from "./components/CreateAccountSuccessModal";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 function App() {
+  const [logged, setLogged] = useState(false);
+  const [createAccountSuccess, setCreateAccountSuccess] = useState(false);
+
+  function handleCloseCreateAccountModal() {
+    setCreateAccountSuccess(false);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <CreateAccountSuccessModal
+        onRequestClose={handleCloseCreateAccountModal}
+        isOpen={createAccountSuccess}
+      />
+      {!logged ? (
+        <LoginScreen
+          setCreateAccountSuccess={setCreateAccountSuccess}
+          setLogged={setLogged}
+        />
+      ) : (
+        <h1>Logado</h1>
+      )}
+    </>
   );
 }
 
