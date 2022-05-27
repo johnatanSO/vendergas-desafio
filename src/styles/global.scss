@@ -28,17 +28,25 @@ body {
 }
 .react-modal-content {
   width: 100%;
-  max-width: 576px;
+  max-width: 400px;
   background-color: rgb(46, 46, 46);
   padding: 3rem;
   position: relative;
   border-radius: 0.25rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  text-align: center;
+  p{
+    margin-top: 5px;
+    color: rgb(157, 157, 157);
+  }
+  button{
+    cursor: pointer;
+  }
 }
 .react-modal-close {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 1rem;
+  right: 1rem;
   border: 0;
   background-color: transparent;
   transition: filter 0.2s;

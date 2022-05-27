@@ -3,15 +3,22 @@ import { useState } from "react";
 import { api } from "../../services/api";
 import {useContext} from 'react'
 import {userDataContext} from '../../userDataContext'
+import Loading from '../Loading'
 
 export function LoginForm({ setLogged }) {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {setName} = useContext(userDataContext) 
+  const {setName} = useContext(userDataContext)
+  const [loading, setLoading] = useState(false)
   /* const {token, setToken} = useContext(userDataContext) */
 
   async function handleLogin(event) {
     event.preventDefault();
+    if(!usernameOrEmail || !password){
+      alert("Por favor, preencha todos os campos")
+      return
+    }
+    setLoading(true)
     await api
       .post("user/login", {
         id: Math.random() * 100,
@@ -19,20 +26,21 @@ export function LoginForm({ setLogged }) {
         password,
       })
       .then(async (res) => {
-        console.log(res)
+        console.log(res);
+        console.log(res.headers)
         if (res.status === 200) {
           await setName(res.data.user.username) 
           setLogged(true);
         }
       })
       .catch((err) => {
-        if (err.response.status === 401) {
-          console.log("Usuário ou senha inválidos");
-          alert("Usuário ou senha inválido!");
+        if (err.response.status === 400) {
+          alert("Usuário e/ou senha inválido(s)");
           setUsernameOrEmail("");
           setPassword("");
         }
       });
+      setLoading(false)
   }
 
   return (
@@ -59,8 +67,8 @@ export function LoginForm({ setLogged }) {
           id="passwordLogin"
           placeholder="Senha"
         />
-        <button onClick={handleLogin} type="submit">
-          Entrar
+        <button disabled={loading} onClick={handleLogin} type="submit">
+          {loading ? <Loading /> : "Entrar"}
         </button>
       </form>
     </div>

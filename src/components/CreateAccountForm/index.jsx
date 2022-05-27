@@ -1,14 +1,21 @@
 import React from "react";
 import { useState } from "react";
 import { api } from "../../services/api";
+import Loading from '../Loading'
 
 export function CreateAccountForm({ setCreateAccountSuccess }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false)
 
   async function handleCreateAccount(event) {
     event.preventDefault();
+    if(!username || !password || !email){
+      alert("Por favor, preencha todos os campos")
+      return
+    }
+    setLoading(true)
     await api
       .post("user/createAccount", {
         id: Math.random() * 100,
@@ -23,11 +30,14 @@ export function CreateAccountForm({ setCreateAccountSuccess }) {
         }
       })
       .catch((err) => {
-        console.log(err);
+        if(err.response.status === 400){
+          alert("E-mail já existe, escolha outro por favor!");
+        }
       });
     setEmail("");
     setUsername("");
     setPassword("");
+    setLoading(false)
   }
 
   return (
@@ -68,7 +78,7 @@ export function CreateAccountForm({ setCreateAccountSuccess }) {
         />
 
         <button onClick={handleCreateAccount} type="submit">
-          Cadastrar novo usuário
+          {loading ? <Loading /> : "Cadastrar"}
         </button>
       </form>
     </div>
