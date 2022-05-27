@@ -3,14 +3,14 @@ import { LoginScreen } from "./components/LoginScreen";
 import "./styles/global.scss";
 import { CreateAccountSuccessModal } from "./components/CreateAccountSuccessModal";
 import Modal from "react-modal";
-import {userDataContext} from './userDataContext'
+import { userDataContext } from "./userDataContext";
 
 Modal.setAppElement("#root");
 
 function App() {
   const [logged, setLogged] = useState(false);
-  const [createAccountSuccess, setCreateAccountSuccess] = useState(false); 
-  const {name} = useContext(userDataContext)
+  const [createAccountSuccess, setCreateAccountSuccess] = useState(false);
+  const { name } = useContext(userDataContext);
 
   function handleCloseCreateAccountModal() {
     setCreateAccountSuccess(false);

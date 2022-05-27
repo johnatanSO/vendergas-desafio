@@ -1,24 +1,24 @@
 import React from "react";
 import { useState } from "react";
 import { api } from "../../services/api";
-import {useContext} from 'react'
-import {userDataContext} from '../../userDataContext'
-import Loading from '../Loading'
+import { useContext } from "react";
+import { userDataContext } from "../../userDataContext";
+import Loading from "../Loading";
 
 export function LoginForm({ setLogged }) {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {setName} = useContext(userDataContext)
-  const [loading, setLoading] = useState(false)
-  /* const {token, setToken} = useContext(userDataContext) */
+  const { setName } = useContext(userDataContext);
+  const [loading, setLoading] = useState(false);
+  const { setToken } = useContext(userDataContext);
 
   async function handleLogin(event) {
     event.preventDefault();
-    if(!usernameOrEmail || !password){
-      alert("Por favor, preencha todos os campos")
-      return
+    if (!usernameOrEmail || !password) {
+      alert("Por favor, preencha todos os campos");
+      return;
     }
-    setLoading(true)
+    setLoading(true);
     await api
       .post("user/login", {
         id: Math.random() * 100,
@@ -26,11 +26,10 @@ export function LoginForm({ setLogged }) {
         password,
       })
       .then(async (res) => {
-        console.log(res);
-        console.log(res.headers)
         if (res.status === 200) {
-          await setName(res.data.user.username) 
+          await setName(res.data.user.username);
           setLogged(true);
+          setToken(res.data.token);
         }
       })
       .catch((err) => {
@@ -40,7 +39,7 @@ export function LoginForm({ setLogged }) {
           setPassword("");
         }
       });
-      setLoading(false)
+    setLoading(false);
   }
 
   return (
