@@ -5,7 +5,7 @@ import LogoImg from '../../assets/Logo.png'
 import {Link} from 'react-router-dom'
 
 export function Sidebar() {
-  const [sectionActive, setSectionActive] = useState('company')
+  const [sectionActive, setSectionActive] = useState('')
   
   return (
     <aside>

@@ -1,13 +1,16 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./style.scss";
 import { CreateAccountForm } from "../CreateAccountForm";
 import { LoginForm } from "../LoginForm";
 
-export function LoginScreen({ setCreateAccountSuccess, setLogged }) {
+
+
+export function LoginScreen({ setCreateAccountSuccess }) {
+
   return (
     <div className="container">
       <div className="containerLoginScreen">
-        <LoginForm setLogged={setLogged} />
+        <LoginForm />
 
         <span>Ou</span>
 

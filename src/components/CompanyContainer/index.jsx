@@ -1,18 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./styles.scss";
 import { CompanyTable } from "../CompanyTable";
 import { api } from "../../services/api";
 import {Buildings} from 'phosphor-react'
+import {userDataContext} from '../../userDataContext'
+
 
 export function CompanyContainer() {
   const [fantasyName, setFantasyName] = useState("");
   const [socialName, setSocialName] = useState("");
   const [cnpj, setCnpj] = useState("");
-  const [companiesList, setCompaniesList] = useState([]);
+  const [companiesList, setCompaniesList] = useState([{}]);
+  const {token, setLogged} = useContext(userDataContext);
 
   useEffect(() => {
-    api.get("/company/listCompanies").then((res) => {
+    api.get("/company/listCompanies",{headers: {'Authorization': token}}).then((res) => {
       setCompaniesList(res.data);
+    }).catch((err) => {
+      if(err.response.status === 401){
+        setLogged(false)
+      }
     });
   }, []);
 

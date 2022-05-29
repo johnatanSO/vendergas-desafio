@@ -11,7 +11,7 @@ export function UserDataContextProvider({children}){
       setName,
       name,
       token,
-      setToken
+      setToken,
     }}>
       {children}
     </userDataContext.Provider>

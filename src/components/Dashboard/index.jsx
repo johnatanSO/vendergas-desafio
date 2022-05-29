@@ -7,8 +7,6 @@ import { ClientsContainer } from '../ClientsContainer'
 import { ProductsContainer } from '../ProductsContainer'
 
 
-
-
 export function Dashboard() {
 
   return (
@@ -16,7 +14,7 @@ export function Dashboard() {
       <Router>
         <Sidebar />
         <Routes>
-          <Route path={'/'} element={<CompanyContainer />} />
+          <Route path={'/'} element={<h1>Seja bem vindo</h1>}/>
           <Route path={'/company'} element={<CompanyContainer />} />
           <Route path={'/clients'} element={<ClientsContainer />} />
           <Route path={'/products'} element={<ProductsContainer />} />

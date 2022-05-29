@@ -2,17 +2,10 @@ const express = require("express");
 const router = express.Router();
 const Company = require("../models/company");
 
-
-/* const companies = [
-  {fantasyName: 'Marvel', socialName: 'Marvel company', cnpj: '123456789'},
-  {fantasyName: 'DC', socialName: 'DC company', cnpj: '123456789'},
-  {fantasyName: 'Disney', socialName: 'Disney company', cnpj: '123456789'},
-] */
-
-
 router.get("/listCompanies", async (req,res)=>{
   const companies = await Company.find()
-  res.send(companies)
+  console.log(req.headers.authorization)
+  req.headers.authorization ? res.status(200).send(companies) : res.status(401).send({message: "Você não tem permissão para acessar essa rota!"})
 })
 
 router.post("/createCompany", async (req,res)=>{
