@@ -17,7 +17,7 @@ const productsList = [
   }
 ]
 
-export function ProductTable({ companiesList }) {
+export function ProductTable({ productsList }) {
   return (
     <table>
       <thead>
@@ -32,8 +32,8 @@ export function ProductTable({ companiesList }) {
         {productsList.map((product, key) => {
           return (
             <tr key={key}>
-              <td>{product.name}</td>
-              <td>{product.value}</td>
+              <td>{product.productName}</td>
+              <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.value)}</td>
               <td>{product.description}</td>
               <td>{product.company}</td>
             </tr>
