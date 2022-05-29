@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import {Dashboard} from "./components/Dashboard";
 import {userDataContext} from './userDataContext'
 
+
 Modal.setAppElement("#root");
 
 function App() {

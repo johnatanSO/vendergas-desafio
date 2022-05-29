@@ -4,7 +4,6 @@ const Company = require("../models/company");
 
 router.get("/listCompanies", async (req,res)=>{
   const companies = await Company.find()
-  console.log(req.headers.authorization)
   req.headers.authorization ? res.status(200).send(companies) : res.status(401).send({message: "Você não tem permissão para acessar essa rota!"})
 })
 
