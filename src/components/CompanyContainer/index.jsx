@@ -10,15 +10,15 @@ export function CompanyContainer() {
   const [fantasyName, setFantasyName] = useState("");
   const [socialName, setSocialName] = useState("");
   const [cnpj, setCnpj] = useState("");
-  const [companiesList, setCompaniesList] = useState([{}]);
-  const {token, setLogged} = useContext(userDataContext);
+  const [companiesList, setCompaniesList] = useState([]);
+  const {token} = useContext(userDataContext);
 
   useEffect(() => {
     api.get("/company/listCompanies",{headers: {'Authorization': token}}).then((res) => {
       setCompaniesList(res.data);
     }).catch((err) => {
       if(err.response.status === 401){
-        setLogged(false)
+        alert('Você não está logado!')
       }
     });
   }, []);

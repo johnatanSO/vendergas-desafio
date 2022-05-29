@@ -1,11 +1,18 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import './styles.scss'
-import {Buildings, UsersThree, ShoppingCart} from 'phosphor-react'
+import {Buildings, SignOut, UsersThree, ShoppingCart} from 'phosphor-react'
 import LogoImg from '../../assets/Logo.png'
 import {Link} from 'react-router-dom'
+import {userDataContext} from '../../userDataContext'
 
 export function Sidebar() {
   const [sectionActive, setSectionActive] = useState('')
+  const {setToken} = useContext(userDataContext)
+
+  function logout(){
+    setToken('')
+    localStorage.removeItem('token')
+  }
   
   return (
     <aside>
@@ -18,6 +25,7 @@ export function Sidebar() {
 
         <Link className="link" to="products"><button onClick={()=>setSectionActive('products')} className={sectionActive === 'products' ? 'menu-item active' : 'menu-item'}><ShoppingCart className="products-icon icon" size={20} /> Produtos</button></Link>
       </div>
+      <button onClick={logout} className="logout"><SignOut className="icon" size={20} />Logout</button>
     </aside>
   )
 }

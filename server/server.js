@@ -9,6 +9,6 @@ app.use(cors());
 app.use("/", express.json());
 app.use("/company", companyRouter);
 app.use("/user", userRouter);
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Server is running on port 3000");
 });

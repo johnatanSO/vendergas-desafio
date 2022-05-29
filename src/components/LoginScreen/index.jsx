@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React from "react";
 import "./style.scss";
 import { CreateAccountForm } from "../CreateAccountForm";
 import { LoginForm } from "../LoginForm";
