@@ -1,16 +1,20 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { LoginScreen } from "./components/LoginScreen";
 import "./styles/global.scss";
 import { CreateAccountSuccessModal } from "./components/CreateAccountSuccessModal";
 import Modal from "react-modal";
-import { userDataContext } from "./userDataContext";
+import {Dashboard} from "./components/Dashboard";
+import {userDataContext} from './userDataContext'
 
 Modal.setAppElement("#root");
 
 function App() {
-  const [logged, setLogged] = useState(false);
+  const {token, setToken} = useContext(userDataContext);
   const [createAccountSuccess, setCreateAccountSuccess] = useState(false);
-  const { name } = useContext(userDataContext);
+
+  useEffect(() =>{
+    setToken(localStorage.getItem('token'));
+  },[])
 
   function handleCloseCreateAccountModal() {
     setCreateAccountSuccess(false);
@@ -22,16 +26,12 @@ function App() {
         onRequestClose={handleCloseCreateAccountModal}
         isOpen={createAccountSuccess}
       />
-      {!logged ? (
+      {!token ? (
         <LoginScreen
           setCreateAccountSuccess={setCreateAccountSuccess}
-          setLogged={setLogged}
         />
       ) : (
-        <div>
-          <h2>Usuário logado</h2>
-          <span>Seja bem vindo, {name}</span>
-        </div>
+        <Dashboard />
       )}
     </>
   );

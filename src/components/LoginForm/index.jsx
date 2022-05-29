@@ -5,12 +5,11 @@ import { useContext } from "react";
 import { userDataContext } from "../../userDataContext";
 import Loading from "../Loading";
 
-export function LoginForm({ setLogged }) {
+export function LoginForm() {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setName } = useContext(userDataContext);
+  const { setName, setToken } = useContext(userDataContext);
   const [loading, setLoading] = useState(false);
-  const { setToken } = useContext(userDataContext);
 
   async function handleLogin(event) {
     event.preventDefault();
@@ -28,8 +27,9 @@ export function LoginForm({ setLogged }) {
       .then(async (res) => {
         if (res.status === 200) {
           await setName(res.data.user.username);
-          setLogged(true);
-          setToken(res.data.token);
+          await setToken(res.data.token);
+          localStorage.setItem("token", res.data.token);
+          
         }
       })
       .catch((err) => {
