@@ -5,6 +5,7 @@ export const userDataContext = createContext()
 export function UserDataContextProvider({children}){
   const [name, setName] = useState('')
   const [token, setToken] = useState('')
+  const [companiesList, setCompaniesList] = useState([]);
 
   return(
     <userDataContext.Provider value={{
@@ -12,6 +13,8 @@ export function UserDataContextProvider({children}){
       name,
       token,
       setToken,
+      companiesList,
+      setCompaniesList
     }}>
       {children}
     </userDataContext.Provider>

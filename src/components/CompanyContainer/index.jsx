@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import "./styles.scss";
+import React, { useState, useContext } from "react";
 import { CompanyTable } from "../CompanyTable";
 import { api } from "../../services/api";
 import {Buildings} from 'phosphor-react'
@@ -10,18 +9,7 @@ export function CompanyContainer() {
   const [fantasyName, setFantasyName] = useState("");
   const [socialName, setSocialName] = useState("");
   const [cnpj, setCnpj] = useState("");
-  const [companiesList, setCompaniesList] = useState([]);
-  const {token} = useContext(userDataContext);
-
-  useEffect(() => {
-    api.get("/company/listCompanies",{headers: {'Authorization': token}}).then((res) => {
-      setCompaniesList(res.data);
-    }).catch((err) => {
-      if(err.response.status === 401){
-        alert('Você não está logado!')
-      }
-    });
-  }, []);
+  const {companiesList, setCompaniesList} = useContext(userDataContext);
 
   async function createNewCompany(e) {
     e.preventDefault();
@@ -49,8 +37,8 @@ export function CompanyContainer() {
   }
 
   return (
-    <div className="company-container">
-      <div className="company-header">
+    <div className="main-container">
+      <div className="main-header">
         <form>
           <h2>Cadastrar nova empresa</h2>
           <input
@@ -80,7 +68,7 @@ export function CompanyContainer() {
         </form>
         <Buildings size={200}/>
       </div>
-      <div className="company-body">
+      <div className="main-body">
         <h3>Lista de empresas</h3>
 
         <CompanyTable companiesList={companiesList} />
