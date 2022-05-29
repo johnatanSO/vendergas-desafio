@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useContext, useEffect } from "react";
+import { LoginScreen } from "./components/LoginScreen";
+import "./styles/global.scss";
+import { CreateAccountSuccessModal } from "./components/CreateAccountSuccessModal";
+import Modal from "react-modal";
+import {Dashboard} from "./components/Dashboard";
+import {userDataContext} from './userDataContext'
+
+Modal.setAppElement("#root");
 
 function App() {
+  const {token, setToken} = useContext(userDataContext);
+  const [createAccountSuccess, setCreateAccountSuccess] = useState(false);
+
+  useEffect(() =>{
+    setToken(localStorage.getItem('token'));
+  },[])
+
+  function handleCloseCreateAccountModal() {
+    setCreateAccountSuccess(false);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <CreateAccountSuccessModal
+        onRequestClose={handleCloseCreateAccountModal}
+        isOpen={createAccountSuccess}
+      />
+      {!token ? (
+        <LoginScreen
+          setCreateAccountSuccess={setCreateAccountSuccess}
+        />
+      ) : (
+        <Dashboard />
+      )}
+    </>
   );
 }
 
