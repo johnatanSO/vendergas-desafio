@@ -8,6 +8,17 @@
   color:white;
   padding: 40px;
   overflow-x: auto;
+  animation: slide-in-container 0.4s;
+  @keyframes slide-in-container {
+    from {
+      transform: translateX(10%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
   .main-header{
     height: auto;
     padding: 20px 30px;

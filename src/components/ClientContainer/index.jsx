@@ -1,24 +1,24 @@
 import React, { useState, useContext, useEffect } from "react";
-import { ProductTable } from "../ProductTable";
-import { ShoppingCart } from "phosphor-react";
+import { ClientTable } from "../ClientTable";
+import { UsersThree } from "phosphor-react";
 import { userDataContext } from "../../userDataContext";
 import { api } from "../../services/api";
-import Loading from '../Loading'
+import Loading from "../Loading"
 
-export function ProductsContainer() {
-  const [productName, setProductName] = useState("");
-  const [value, setValue] = useState("");
-  const [description, setDescription] = useState("");
+export function ClientsContainer() {
+  const [clientName, setClientName] = useState("");
+  const [email, setEmail] = useState("");
+  const [tel, setTel] = useState("");
   const [company, setCompany] = useState("");
   const { token, companiesList } = useContext(userDataContext);
-  const [productsList, setProductsList] = useState([]);
+  const [clientsList, setClientsList] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     api
-      .get("/product/listProducts", { headers: { Authorization: token } })
+      .get("/client/listClients", { headers: { Authorization: token } })
       .then((res) => {
-        setProductsList(res.data);
+        setClientsList(res.data);
       })
       .catch((err) => {
         if (err.response.status === 401) {
@@ -28,61 +28,62 @@ export function ProductsContainer() {
   }, []);
 
 
-  async function createNewProduct(e) {
+  async function createNewClient(e) {
     e.preventDefault();
     setLoading(true);
     
-    if (!productName || !value || !description || !company) {
+    if (!clientName || !email || !tel || !company) {
       alert("Preencha todos os campos por favor!");
       setLoading(false)
       return;
     }
     await api
-      .post("/product/createProduct", {
-        productName,
-        value,
-        description,
+      .post("/client/createClient", {
+        clientName,
+        email,
+        tel,
         company,
       })
       .then((res) => {
-        setProductsList([...productsList, res.data.product]);
+        setClientsList([...clientsList, res.data.client]);
       })
       .catch((err) => {
         if (err.response.status === 400) {
-          alert(err.response.data.error);
+          console.log(err)
+          alert(err.response.data.message);
         } else {
           console.log(err);
         }
       });
-    setProductName("");
-    setValue("");
-    setDescription("");
-    setLoading(false);
+    setClientName("");
+    setEmail("");
+    setTel("");
+    setLoading(false)
   }
 
   return (
     <div className="main-container">
       <div className="main-header">
         <form>
-          <h2>Cadastrar novo produto</h2>
+          <h2>Cadastrar novo cliente</h2>
           <input
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
-            placeholder="Nome do produto"
+            value={clientName}
+            onChange={(e) => setClientName(e.target.value)}
+            placeholder="Nome do cliente"
             type="text"
           />
 
           <input
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            placeholder="Valor do produto"
-            type="number"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="E-mail do cliente"
+            type="text"
           />
 
           <input
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Descrição do produto"
+            value={tel}
+            onChange={(e) => setTel(e.target.value)}
+            placeholder="Telefone do cliente"
             type="text"
           />
 
@@ -110,16 +111,16 @@ export function ProductsContainer() {
             })}
           </select>
 
-          <button onClick={createNewProduct} type="submit">
+          <button onClick={createNewClient} type="submit">
             {!loading ? "Cadastrar" : <Loading />}
           </button>
         </form>
-        <ShoppingCart size={200} />
+        <UsersThree size={200} />
       </div>
       <div className="main-body">
-        <h3>Lista de produtos</h3>
+        <h3>Lista de clientes</h3>
 
-        <ProductTable productsList={productsList} />
+        <ClientTable clientsList={clientsList} />
       </div>
     </div>
   );
