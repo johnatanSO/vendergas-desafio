@@ -3,6 +3,7 @@ import { CompanyTable } from "../CompanyTable";
 import { api } from "../../services/api";
 import {Buildings} from 'phosphor-react'
 import {userDataContext} from '../../userDataContext'
+import Loading from '../Loading'
 
 
 export function CompanyContainer() {
@@ -10,11 +11,14 @@ export function CompanyContainer() {
   const [socialName, setSocialName] = useState("");
   const [cnpj, setCnpj] = useState("");
   const {companiesList, setCompaniesList} = useContext(userDataContext);
+  const [loading, setLoading] = useState(false);
 
   async function createNewCompany(e) {
     e.preventDefault();
+    setLoading(true)
     if (!fantasyName || !socialName || !cnpj) {
       alert("Preencha todos os campos por favor!");
+      setLoading(false)
       return;
     }
 
@@ -34,6 +38,7 @@ export function CompanyContainer() {
     setFantasyName("");
     setSocialName("");
     setCnpj("");
+    setLoading(false);
   }
 
   return (
@@ -63,7 +68,7 @@ export function CompanyContainer() {
           />
 
           <button onClick={createNewCompany} type="submit">
-            Cadastrar
+            {!loading ? "Cadastrar" : <Loading />}
           </button>
         </form>
         <Buildings size={200}/>

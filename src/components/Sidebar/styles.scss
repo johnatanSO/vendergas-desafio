@@ -7,6 +7,17 @@ aside{
   align-items: center;
   justify-content: center;
   position: relative;
+  animation: slide-in 0.4s;
+  @keyframes slide-in {
+    from {
+      transform: translateX(-20%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
   .link{
     text-decoration: none;
   }
@@ -18,6 +29,7 @@ aside{
   .logout{
     position: absolute;
     bottom: 0px;
+    left: 0;
     width: 100%;
     display: flex;
     justify-content: center;
