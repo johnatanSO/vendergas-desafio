@@ -5,7 +5,7 @@ const Product = require("../models/product");
  router.get("/listProducts", async (req,res)=>{
   const products = await Product.find()
   req.headers.authorization ? res.status(200).send(products) : res.status(401).send({message: "Você não tem permissão para acessar essa rota!"})
-}) 
+})
 
 router.post("/createProduct", async (req,res)=>{
   const {productName, value, description, company} = req.body

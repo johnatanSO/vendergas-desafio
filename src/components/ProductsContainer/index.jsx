@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { ProductTable } from "../ProductTable";
 import { ShoppingCart } from "phosphor-react";
 import { userDataContext } from "../../userDataContext";
@@ -6,27 +6,13 @@ import { api } from "../../services/api";
 import Loading from '../Loading'
 
 export function ProductsContainer() {
+  const { companiesList, productsList, setProductsList, token } = useContext(userDataContext);
+
   const [productName, setProductName] = useState("");
   const [value, setValue] = useState("");
   const [description, setDescription] = useState("");
   const [company, setCompany] = useState("");
-  const { token, companiesList } = useContext(userDataContext);
-  const [productsList, setProductsList] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    api
-      .get("/product/listProducts", { headers: { Authorization: token } })
-      .then((res) => {
-        setProductsList(res.data);
-      })
-      .catch((err) => {
-        if (err.response.status === 401) {
-          alert("Você não está logado!");
-        }
-      });
-  }, []);
-
 
   async function createNewProduct(e) {
     e.preventDefault();
@@ -43,7 +29,7 @@ export function ProductsContainer() {
         value,
         description,
         company,
-      })
+      }, { headers: { Authorization: token } })
       .then((res) => {
         setProductsList([...productsList, res.data.product]);
       })
