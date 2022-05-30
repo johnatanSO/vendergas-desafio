@@ -1,40 +1,26 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { ClientTable } from "../ClientTable";
 import { UsersThree } from "phosphor-react";
 import { userDataContext } from "../../userDataContext";
 import { api } from "../../services/api";
-import Loading from "../Loading"
+import Loading from "../Loading";
 
 export function ClientsContainer() {
+  const { companiesList, clientsList, setClientsList, token } = useContext(userDataContext);
+
   const [clientName, setClientName] = useState("");
   const [email, setEmail] = useState("");
   const [tel, setTel] = useState("");
   const [company, setCompany] = useState("");
-  const { token, companiesList } = useContext(userDataContext);
-  const [clientsList, setClientsList] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    api
-      .get("/client/listClients", { headers: { Authorization: token } })
-      .then((res) => {
-        setClientsList(res.data);
-      })
-      .catch((err) => {
-        if (err.response.status === 401) {
-          alert("Você não está logado!");
-        }
-      });
-  }, []);
-
 
   async function createNewClient(e) {
     e.preventDefault();
     setLoading(true);
-    
+
     if (!clientName || !email || !tel || !company) {
       alert("Preencha todos os campos por favor!");
-      setLoading(false)
+      setLoading(false);
       return;
     }
     await api
@@ -43,13 +29,13 @@ export function ClientsContainer() {
         email,
         tel,
         company,
-      })
+      }, { headers: { Authorization: token } })
       .then((res) => {
         setClientsList([...clientsList, res.data.client]);
       })
       .catch((err) => {
         if (err.response.status === 400) {
-          console.log(err)
+          console.log(err);
           alert(err.response.data.message);
         } else {
           console.log(err);
@@ -58,7 +44,7 @@ export function ClientsContainer() {
     setClientName("");
     setEmail("");
     setTel("");
-    setLoading(false)
+    setLoading(false);
   }
 
   return (
@@ -97,7 +83,9 @@ export function ClientsContainer() {
             name="companies"
             id="companies"
           >
-            <option className="option-disabled" disabled value="">Selecione...</option>
+            <option className="option-disabled" disabled value="">
+              Selecione...
+            </option>
             {companiesList.map((company, key) => {
               return (
                 <option

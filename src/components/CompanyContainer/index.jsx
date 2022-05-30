@@ -1,24 +1,25 @@
 import React, { useState, useContext } from "react";
 import { CompanyTable } from "../CompanyTable";
 import { api } from "../../services/api";
-import {Buildings} from 'phosphor-react'
-import {userDataContext} from '../../userDataContext'
-import Loading from '../Loading'
-
+import { Buildings } from "phosphor-react";
+import { userDataContext } from "../../userDataContext";
+import Loading from "../Loading";
 
 export function CompanyContainer() {
+  const { companiesList, setCompaniesList, token } =
+    useContext(userDataContext);
+
   const [fantasyName, setFantasyName] = useState("");
   const [socialName, setSocialName] = useState("");
   const [cnpj, setCnpj] = useState("");
-  const {companiesList, setCompaniesList} = useContext(userDataContext);
   const [loading, setLoading] = useState(false);
 
   async function createNewCompany(e) {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     if (!fantasyName || !socialName || !cnpj) {
       alert("Preencha todos os campos por favor!");
-      setLoading(false)
+      setLoading(false);
       return;
     }
 
@@ -26,7 +27,7 @@ export function CompanyContainer() {
         fantasyName,
         socialName,
         cnpj,
-      })
+      },{headers: { Authorization: token }})
       .then((res) => {
         setCompaniesList([...companiesList, res.data.company]);
       })
@@ -71,7 +72,7 @@ export function CompanyContainer() {
             {!loading ? "Cadastrar" : <Loading />}
           </button>
         </form>
-        <Buildings size={200}/>
+        <Buildings size={200} />
       </div>
       <div className="main-body">
         <h3>Lista de empresas</h3>

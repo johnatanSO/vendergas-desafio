@@ -1,6 +1,6 @@
 import React, {useState, useContext,useEffect} from 'react'
 import './styles.scss'
-import {Buildings, SignOut, UsersThree, ShoppingCart} from 'phosphor-react'
+import {Buildings, SignOut, Note, UsersThree, ShoppingCart} from 'phosphor-react'
 import LogoImg from '../../assets/Logo.png'
 import {Link} from 'react-router-dom'
 import {userDataContext} from '../../userDataContext'
@@ -27,6 +27,9 @@ export function Sidebar() {
         <Link className="link" to="products"><button onClick={()=>setSectionActive('products')} className={sectionActive === 'products' ? 'menu-item active' : 'menu-item'}><ShoppingCart className="products-icon icon" size={20} /> Produtos</button></Link>
 
         <Link className="link" to="/clients"><button onClick={()=>setSectionActive('clients')} className={sectionActive === 'clients' ? 'menu-item active' : 'menu-item'}><UsersThree className="clients-icon icon" size={20} /> Clientes</button></Link>
+
+        <Link className="link" to="/orders"><button onClick={()=>setSectionActive('orders')} className={sectionActive === 'orders' ? 'menu-item active' : 'menu-item'}><Note className="orders-icon icon" size={20} /> Pedidos</button></Link>
+
       </div>
       <Link to="/"><button onClick={logout} className="logout"><SignOut className="icon" size={20} />Logout</button></Link>
     </aside>
