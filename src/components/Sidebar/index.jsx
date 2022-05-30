@@ -6,20 +6,20 @@ import {Link} from 'react-router-dom'
 import {userDataContext} from '../../userDataContext'
 
 export function Sidebar() {
-  const [sectionActive, setSectionActive] = useState(localStorage.getItem('sectionActive') || '')
-  const {setToken} = useContext(userDataContext)
+  const {setToken, sectionActive, setSectionActive} = useContext(userDataContext)
 
   function logout(){
     setToken('')
     localStorage.removeItem('token')
   }
+  
   useEffect(() =>{
     localStorage.setItem('sectionActive', sectionActive)
   },[sectionActive])
   
   return (
     <aside>
-      <img className="logo" src={LogoImg} alt="Logo da página" />
+      <Link className="link-logo" to={'/'}><img className="logo" src={LogoImg} alt="Logo da página" /></Link>
       <div className={"menu"}>
 
         <Link className="link" to="/company"><button onClick={()=>setSectionActive('company')} className={sectionActive === 'company' ? 'menu-item active' : 'menu-item'}><Buildings className="company-icon icon" size={20} /> Empresas</button></Link>

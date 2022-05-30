@@ -8,6 +8,8 @@ export function UserDataContextProvider({children}){
   const [companiesList, setCompaniesList] = useState([]);
   const [clientsList, setClientsList] = useState([]);
   const [productsList, setProductsList] = useState([]);
+  const [sectionActive, setSectionActive] = useState(localStorage.getItem('sectionActive'))
+
 
   return(
     <userDataContext.Provider value={{
@@ -20,7 +22,9 @@ export function UserDataContextProvider({children}){
       clientsList,
       setClientsList,
       productsList,
-      setProductsList
+      setProductsList,
+      sectionActive,
+      setSectionActive
     }}>
       {children}
     </userDataContext.Provider>

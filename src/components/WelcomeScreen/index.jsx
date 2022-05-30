@@ -1,11 +1,16 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, useContext} from 'react'
+import './styles.scss'
+import { userDataContext } from '../../userDataContext'
 
 export function WelcomeScreen() {
+  const {setSectionActive} = useContext(userDataContext)
   useEffect(() => {
-    document.title = 'Bem vindo!'
     localStorage.removeItem('sectionActive')
+    setSectionActive('')
   },[])
   return (
-    <div>Bem vindo!</div>
+    <div className="welcomeScreen">
+      <h1>Bem vindo ao sistema de gestão de comércio.</h1>
+    </div>
   )
 }
