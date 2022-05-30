@@ -28,7 +28,7 @@ export function Sidebar() {
 
         <Link className="link" to="/clients"><button onClick={()=>setSectionActive('clients')} className={sectionActive === 'clients' ? 'menu-item active' : 'menu-item'}><UsersThree className="clients-icon icon" size={20} /> Clientes</button></Link>
       </div>
-      <button onClick={logout} className="logout"><SignOut className="icon" size={20} />Logout</button>
+      <Link to="/"><button onClick={logout} className="logout"><SignOut className="icon" size={20} />Logout</button></Link>
     </aside>
   )
 }
