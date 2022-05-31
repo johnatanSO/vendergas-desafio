@@ -76,7 +76,7 @@
 <li> Clone o repositório com: git clone https://github.com/johnatanSO/vendergas-desafio.git
 <li> Entre em uma IDE de sua preferência;
 <li> Execute o 'npm install' para instalar as dependências do front-end;
-<li> Execute o npm start para iniciar o servidor local;
+<li> Execute o npm start para iniciar o servidor local, (por padrão, ele tentará executar na porta 3000, porém ela está em uso no nosso servidor, então permita ele executar em outra porta.);
 <li> Crie uma nova conta e faça login com ela.
 <br>
 
