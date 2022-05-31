@@ -68,7 +68,7 @@
 <h2>👷 Como testar? </h2>
   <h3>BACK-END: </h3>
 <li>Entre na pasta /server; </li>
-<li>Crie um container local com o arquivo Dockerfile e execute-o;</li>
+<li>Crie uma imagem/container docker local com o arquivo Dockerfile usando o comando 'Docker build -t |nome_da_imagem| .' e  execute-o com o comando 'Docker run -p 3000:3000 |nome_da_imagem|';</li>
 <li>Ou, execute o comando 'npm install' para instalar as dependências do servidor;</li>
 <li>Execute o comando 'node server.js' para iniciar o servidor (será executado por padrão na porta 3000, certifique-se de que está disponível).</li>
 
