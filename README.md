@@ -77,7 +77,7 @@
 <li>Entre na pasta /server; </li>
 <li>Crie um container local com o arquivo Dockerfile e execute-o;</li>
 <li>Ou, execute o comando 'npm install' para instalar as dependências do servidor;</li>
-<li>Execute o comando 'npm start' para iniciar o servidor (será executado por padrão na porta 3000, certifique-se de que está disponível).</li>
+<li>Execute o comando 'node server.js' para iniciar o servidor (será executado por padrão na porta 3000, certifique-se de que está disponível).</li>
 <br>
 
 <h3>Rotas:</h3>
