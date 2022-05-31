@@ -1,22 +1,4 @@
 import React from "react";
-
-const productsList = [
-  {
-    id: 1,
-    name: "Produto 1",
-    value: "R$ 100,00",
-    description: "Descrição do produto 1",
-    company: "Empresa 1",
-  },
-  {
-    id: 2,
-    name: "Produto 2",
-    value: "R$ 200,00",
-    description: "Descrição do produto 2",
-    company: "Empresa 2",
-  }
-]
-
 export function ProductTable({ productsList }) {
   return (
     <table>

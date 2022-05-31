@@ -1,4 +1,4 @@
-import React, {useState, useContext,useEffect} from 'react'
+import React, { useContext,useEffect} from 'react'
 import './styles.scss'
 import {Buildings, SignOut, Note, UsersThree, ShoppingCart} from 'phosphor-react'
 import LogoImg from '../../assets/Logo.png'
