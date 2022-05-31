@@ -8,8 +8,10 @@ router.get("/listCompanies", async (req,res)=>{
 })
 
 router.post("/createCompany", async (req,res)=>{
+  
 
   const {fantasyName, socialName, cnpj} = req.body
+  console.log(fantasyName, socialName, cnpj)
   if(!fantasyName || !socialName || !cnpj){
     return res.status(400).send({error: "Dados insuficientes"})
   }else{

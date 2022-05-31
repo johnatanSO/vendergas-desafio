@@ -21,14 +21,18 @@ aside{
   .link{
     text-decoration: none;
   }
-  .logo {
+  .link-logo {
     width: 80%;
     position: absolute;
     top: 0;
+    cursor: pointer;
+    img{
+      width: 100%;
+    }
   }
   .logout{
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     left: 0;
     width: 100%;
     display: flex;
