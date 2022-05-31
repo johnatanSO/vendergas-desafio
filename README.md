@@ -66,18 +66,18 @@
 <br>
 
 <h2>👷 Como testar? </h2>
+  <h3>BACK-END: </h3>
+<li>Entre na pasta /server; </li>
+<li>Crie um container local com o arquivo Dockerfile e execute-o;</li>
+<li>Ou, execute o comando 'npm install' para instalar as dependências do servidor;</li>
+<li>Execute o comando 'node server.js' para iniciar o servidor (será executado por padrão na porta 3000, certifique-se de que está disponível).</li>
+
 <h3>FRONT-END: </h3>
 <li> Clone o repositório com: git clone https://github.com/johnatanSO/vendergas-desafio.git
 <li> Entre em uma IDE de sua preferência;
 <li> Execute o 'npm install' para instalar as dependências do front-end;
 <li> Execute o npm start para iniciar o servidor local;
 <li> Crie uma nova conta e faça login com ela.
-  
-<h3>BACK-END: </h3>
-<li>Entre na pasta /server; </li>
-<li>Crie um container local com o arquivo Dockerfile e execute-o;</li>
-<li>Ou, execute o comando 'npm install' para instalar as dependências do servidor;</li>
-<li>Execute o comando 'node server.js' para iniciar o servidor (será executado por padrão na porta 3000, certifique-se de que está disponível).</li>
 <br>
 
 <h3>Rotas:</h3>
